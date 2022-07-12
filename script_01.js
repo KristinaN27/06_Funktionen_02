@@ -9,4 +9,11 @@
 */
 
 
+ // module; console output | test:
+
+ output("Hello");
+ output(20);
+ function output(inputData) {
+    console.log(inputData);
+ }
  
