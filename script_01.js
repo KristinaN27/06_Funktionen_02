@@ -3,11 +3,10 @@
 /*
 0. a+b / a-b/ a*b / a/b  // ergebnis c 
 1. Dateneingabe + -überprüfung :
-2. Auswahl Rechenart :
-3. Fkt. Grundrechenarten :
-4. Ausgabe in Konsole :
+2. Auswahl Rechenart : check!
+3. Fkt. Grundrechenarten : check!
+4. Ausgabe in Konsole :check!
 */
-
 
 // application / App
 startApp();
@@ -15,21 +14,64 @@ function startApp() {
     output(calculator(getNumber("1"),getOp(),getNumber("2")));
 }
 
-
+// module: data input | test:
+// output(getNumber("1"));
 function getNumber(numTxt) {
+    
     const displayStr = "Bitte Zahl " + numTxt + " eingeben:";
     let inputStr = prompt(displayStr);
     let num = parseInt(inputStr);
+   
+    // if num is NOT valid AND user DIDN'T click at Abbrechen
+    while (isNaN(num) && (inputStr !== null)) {
+        inputStr =  prompt(displayStr);
+        num = parseInt(inputStr); 
+    }
+
     return num;
 }
 
-
+// module: input operator | Test:
+// output(getOp());
 function getOp() {
+
     const displayStr = "Bitte korrekten Operator (+ | - | * | :) eingeben";
-    let op = prompt(displayStr);
+    let op = prompt(displayStr); 
+
+    // if op is NOT valid AND user DIDN'T click at Abbrechen
+    while (!isOpValid(op) && (op !== null)) {
+        op = prompt(displayStr);
+    }
+
     return op;
+
 }
 
+// module: check operator | Test:
+// agreement : "+","-","*",":"
+// output(isOpValid("+"));
+// output(isOpValid("-"));
+// output(isOpValid("*"));
+// output(isOpValid(":"));
+// output(isOpValid("#?#"));
+// output(isOpValid(""));
+function isOpValid(op) {
+
+    //1st variant
+    switch (op) {
+        case "+":
+        case "-":
+        case "*":
+        case ":":
+            return true;
+        default:
+            return false;
+    }
+
+    // 2nd variant
+    // return op == "+" || op == "-" || op == "*" || op == ":";
+
+}
 
 // module: calculator | tests:
 // agreement : "+","-","*",":"
@@ -94,9 +136,9 @@ function add(a,b) {
 // output("hello");
 // output(20);
  function output(inputData) {
-    console.log(inputData);
+    if (typeof inputData == "number") {
+        console.log("The result is: " + inputData);
+    } else {
+        console.log("ERROR: " + inputData);
+    }
  }
-
- // TO DO:
- // output(20) ---> "The result is: "  20
- // output("Error") --> "Error"
